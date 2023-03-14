@@ -17,26 +17,26 @@ import copy
 #backtracking function, takes parent node from explored nodes and stores the coordinates of the path in a new list
 def Backtrack(S,start_node,goal_node,canvas):
     #fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    #out = cv2.VideoWriter('Dijkstra.avi',fourcc,1000,(canvas.shape[1],canvas.shape[0]))
+    #out = cv2.VideoWriter('Dijkstra.mp4',fourcc,1000,(canvas.shape[1],canvas.shape[0]))
     explored_nodes=S.keys()
     navigation=[]
     navigation.append(goal_node)
+    start=copy.deepcopy(start_node)
+    goal=copy.deepcopy(goal_node)
+    start.reverse()
+    goal.reverse()
     cv2.circle(canvas,tuple(start),3,(0,255,0),-1)           #draw green and red circles representing the start & goal
     cv2.circle(canvas,tuple(goal),3,(0,0,255),-1)
     for node in explored_nodes:
         canvas[node[0]][node[1]]=[255,255,255]
         cv2.imshow("Nodes Exploration",canvas)
         cv2.waitKey(1)
-       # out.write(canvas)
+        out.write(canvas)
     parent=S[tuple(goal_node)]
     while(parent!=start_node):
         navigation.append(parent)
         parent=S[tuple(parent)]
     navigation.append(start_node)
-    start=copy.deepcopy(start_node)
-    goal=copy.deepcopy(goal_node)
-    start.reverse()
-    goal.reverse()
     
     while(len(navigation)>0):
         path_node = navigation.pop()
@@ -46,6 +46,12 @@ def Backtrack(S,start_node,goal_node,canvas):
     cv2.imshow("Nodes Exploration",canvas)
     #out.release()
     print(navigation)
+    
+    
+    
+    
+    
+    
     
 #move-up     
 def Move_up(node,canvas):
