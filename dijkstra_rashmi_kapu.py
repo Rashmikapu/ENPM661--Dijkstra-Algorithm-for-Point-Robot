@@ -21,6 +21,8 @@ def Backtrack(S,start_node,goal_node,canvas):
     explored_nodes=S.keys()
     navigation=[]
     navigation.append(goal_node)
+    cv2.circle(canvas,tuple(start),3,(0,255,0),-1)           #draw green and red circles representing the start & goal
+    cv2.circle(canvas,tuple(goal),3,(0,0,255),-1)
     for node in explored_nodes:
         canvas[node[0]][node[1]]=[255,255,255]
         cv2.imshow("Nodes Exploration",canvas)
@@ -35,8 +37,7 @@ def Backtrack(S,start_node,goal_node,canvas):
     goal=copy.deepcopy(goal_node)
     start.reverse()
     goal.reverse()
-    cv2.circle(canvas,tuple(start),3,(0,255,0),-1)           #draw green and red circles representing the start & goal
-    cv2.circle(canvas,tuple(goal),3,(0,0,255),-1)
+    
     while(len(navigation)>0):
         path_node = navigation.pop()
         canvas[path_node[0]][path_node[1]] = [184,13,218]
